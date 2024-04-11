@@ -13,8 +13,8 @@ class Trader:
         print(f"Observations: {state.observations}")
 
         # Decode values of interest from previous states
-        if traderData != "":
-            thawed = jsonpickle.decode(traderData)
+        if state.traderData != "":
+            thawed = jsonpickle.decode(state.traderData)
             storage = Storage(
                 trailing_median = thawed.median_lst
             )
@@ -48,7 +48,7 @@ class Trader:
         sell_order_lst = list(order_depth.sell_orders.keys())
         buy_order_lst = list(order_depth.buy_orders.keys())
         order_lst = sell_order_lst.extend(buy_order_lst)
-        if traderData != "":
+        if state.traderData != "":
             complete_lst = order_lst.extend(storage.median_lst)
         storage.median_lst.extend(statistics.median_high(complete_lst))
     
@@ -66,6 +66,7 @@ class Storage:
 
     def __init__(self, trailing_median: List[int]) -> None:
         self.median_lst = trailing_median
+        self.ame_price = 10000
     
     def get_median(self) -> int:
         return statistics.median(self.median_lst)
