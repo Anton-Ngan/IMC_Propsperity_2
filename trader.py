@@ -26,7 +26,7 @@ class Trader:
             myorders: List[Order] = []
 
             # Value to calculate whether we should buy or sell a product
-            acceptable_price = statistics.median(list(order_depth.sell_orders.items())[0][[0]]) if state.traderData == "" else storage.median_lst[-1];    
+            acceptable_price = statistics.median(list(order_depth.sell_orders.items())[0][0]) if state.traderData == "" else storage.median_lst[-1];    
             print(f"Acceptable price: {acceptable_price}")
             print(f"Buy Order depth: {len(order_depth.buy_orders)} Sell order depth: {len(order_depth.sell_orders)}")
     
